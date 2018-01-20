@@ -4,7 +4,7 @@ import BookCard from './BookCard';
 
 class BooksList extends Component {
     render() {
-        const {books} = this.props;
+        const {books, shelfChange} = this.props;
 
         return (
             <div className="list-books">
@@ -17,7 +17,9 @@ class BooksList extends Component {
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
-                                    <BookCard/>
+                                    {books.filter((b) => b.shelf === 'currentlyReading').map((book) => (
+                                        <BookCard key={book.id} book={book} shelfChange={shelfChange} />
+                                    ))}
                                 </ol>
                             </div>
                         </div>
@@ -25,6 +27,9 @@ class BooksList extends Component {
                             <h2 className="bookshelf-title">Want to Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
+                                    {books.filter((b) => b.shelf === 'wantToRead').map((book) => (
+                                        <BookCard key={book.id} book={book} shelfChange={shelfChange} />
+                                    ))}
                                 </ol>
                             </div>
                         </div>
@@ -32,6 +37,9 @@ class BooksList extends Component {
                             <h2 className="bookshelf-title">Read</h2>
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
+                                    {books.filter((b) => b.shelf === 'read').map((book) => (
+                                        <BookCard key={book.id} book={book} shelfChange={shelfChange} />
+                                    ))}
                                 </ol>
                             </div>
                         </div>
